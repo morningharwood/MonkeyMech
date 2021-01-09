@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf367900e81aeb444a276206d00f094d, type: 3}
+  m_Name: Bomb
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 0}
+  description: A consumable bomb that your Mechs can use to destory a level 1 block
+    in a small radius.
+  cost: 10
+  lifetime: 1
+  lootRequired: []
