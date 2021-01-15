@@ -10,23 +10,5 @@ public class MechController : MonoBehaviour
     {
         _collider = GetComponent<CapsuleCollider>();
     }
-
-    public bool isGrounded
-    {
-        get
-        {
-            float extraHeight = .25f;
-            bool rayHit = false;
-            if (Physics.Raycast(_collider.bounds.center, Vector3.down, _collider.bounds.extents.y + extraHeight))
-            {
-                rayHit = true;
-            }
-            else
-            {
-                rayHit = false;
-            }
-            return rayHit;
-        }
-        
-    }
+    public bool IsGrounded => Physics.Raycast(_collider.bounds.center, Vector3.down, _collider.bounds.extents.y + .25f);
 }
