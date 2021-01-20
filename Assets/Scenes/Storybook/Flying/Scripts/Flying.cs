@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 public class Flying : MonoBehaviour
 {
     [SerializeField] private InputActionReference inputActionLeftPositionRef = null;
     [SerializeField] private InputActionReference inputActionRightPositionRef = null;
-    private MechController mechController;
-    private Vector3 _sqMag;
+    [SerializeField] private float flySpeed = 10.0f;
+    [SerializeField] private float groundedOffset = 0.1f;
+
+    private CharacterController characterController;
+    private XRRig rig;
+
     private Vector3 leftPos = new Vector3();
     private Vector3 rightPos = new Vector3();
+
+    private bool shouldFly = false;
 
     private void OnEnable()
     {
@@ -24,9 +31,15 @@ public class Flying : MonoBehaviour
         inputActionRightPositionRef.asset.Disable();
     }
 
+    private void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+        rig = GetComponent<XRRig>();
+    }
+
     private void Start()
     {
-        mechController = GetComponent<MechController>();
+        
         inputActionLeftPositionRef.action.performed += DoChangeLeft;
         inputActionRightPositionRef.action.performed += DoChangeRight;
     }
@@ -40,12 +53,19 @@ public class Flying : MonoBehaviour
     void Update()
     {
         Vector3 offset = leftPos - rightPos;
-        float sqrMag = offset.sqrMagnitude;
-        bool shouldFly = mechController.IsGrounded && offset.sqrMagnitude >= 1.75f;
+        bool tshaped = offset.sqrMagnitude >= 1.75f;
+        shouldFly = !IsGrounded && tshaped;
+    }
 
-
-        print(shouldFly);
-
+    
+    private void FixedUpdate()
+    {
+        if(shouldFly)
+        {
+            Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
+            Vector3 direction = headYaw * Vector3.forward;
+            characterController.Move(direction * Time.fixedDeltaTime * flySpeed);
+        }
     }
 
     private void DoChangeLeft(InputAction.CallbackContext context)
@@ -57,4 +77,6 @@ public class Flying : MonoBehaviour
     {
         rightPos = context.ReadValue<Vector3>();
     }
+
+    public bool IsGrounded => Physics.Raycast(characterController.bounds.center, Vector3.down, characterController.bounds.extents.y + groundedOffset);
 }
