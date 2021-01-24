@@ -355,7 +355,7 @@
                     "path": "<XRController>{LeftHand}/deviceVelocity",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Generic XR Controller",
                     "action": "Velocity",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -486,6 +486,14 @@
                     "type": "PassThrough",
                     "id": "4b1b18da-7216-4557-97c0-51dc87b717a0",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Velocity",
+                    "type": "Value",
+                    "id": "1e1a26e4-0e84-456c-bd10-f8c733c791d6",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": ""
                 }
@@ -664,6 +672,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dc8dcb1a-99cc-4a25-930d-c6798a0b35fa",
+                    "path": "<XRController>{RightHand}/deviceVelocity",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Velocity",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
