@@ -7,7 +7,7 @@ using System.Linq;
 public class Climber : MonoBehaviour
 {
 
-    private const float CLIMB_COMPLETE_TIME = 1.25f;
+    private const float MOUNT_TIME = 1.25f;
     private const bool DEBUG_RAY = true;
 
 
@@ -16,8 +16,9 @@ public class Climber : MonoBehaviour
         None,
         Climbing,
         AtTop,
-        Completing
+        Mounting
     }
+
 
     [SerializeField] private InputActionReference inputActionLeftVelocityRef = null;
     [SerializeField] private InputActionReference inputActionRightVelocityRef = null;
@@ -27,8 +28,8 @@ public class Climber : MonoBehaviour
     private ActionBasedContinuousMoveProvider continuousMoveProvider;
     private BodyOrientation bodyOrientation;
     private ClimbState _state = ClimbState.None;
-    private Vector3 climbCompleteDestionation;
-    private float climbCompleteTimeElapsed; 
+    private Vector3 _mountDestinationPosition;
+    private float _mountTimeElapsed; 
 
 
     private void OnEnable()
@@ -64,9 +65,9 @@ public class Climber : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_state == ClimbState.Completing)
+        if (_state == ClimbState.Mounting)
         {
-            CompleteClimb();
+            ContinueToMount();
         }
         else if (ActiveHand.current != null)
         {
@@ -76,7 +77,7 @@ public class Climber : MonoBehaviour
         }
         else
         {
-            StopClimb();
+            FinishedClimbing();
         }
     }
 
@@ -101,16 +102,14 @@ public class Climber : MonoBehaviour
         const float NECK_DOWN_FROM_CAMERA = -0.25f;
         const float MAX_HIT_DISTANCE = 2.0f;
 
-        BodyOrientation.BodyOrientationInformation bodyFacingInformation = bodyOrientation.GetOrientation();
-
-        Vector3 rayFromPosition = 
-            bodyFacingInformation.CameraPosition +
-            (bodyFacingInformation.UpDirection * NECK_DOWN_FROM_CAMERA);
+        Vector3 rayForwardFromNeck = 
+            bodyOrientation.CameraPosition +
+            (bodyOrientation.UpDirection * NECK_DOWN_FROM_CAMERA);
 
         // for debugging purposes
         transform.GetComponent<LineRenderer>().enabled = DEBUG_RAY;
-        transform.GetComponent<LineRenderer>().SetPosition(0, rayFromPosition);
-        Vector3 targetPosition = rayFromPosition + bodyFacingInformation.ForwardFacingDirection.normalized * MAX_HIT_DISTANCE;
+        transform.GetComponent<LineRenderer>().SetPosition(0, rayForwardFromNeck);
+        Vector3 targetPosition = rayForwardFromNeck + bodyOrientation.ForwardFacingDirection * MAX_HIT_DISTANCE;
         transform.GetComponent<LineRenderer>().SetPosition(1, targetPosition);
 
         _state = ClimbState.Climbing;
@@ -119,7 +118,7 @@ public class Climber : MonoBehaviour
         {
             bool atTop = true;
 
-            RaycastHit[] hits = Physics.RaycastAll(rayFromPosition, bodyFacingInformation.ForwardFacingDirection, MAX_HIT_DISTANCE); 
+            RaycastHit[] hits = Physics.RaycastAll(rayForwardFromNeck, bodyOrientation.ForwardFacingDirection, MAX_HIT_DISTANCE); 
             if (hits != null && hits.Length > 0)
             {
                 var otherHits = hits.Where(hit => hit.transform.gameObject != this.transform.gameObject);
@@ -129,7 +128,6 @@ public class Climber : MonoBehaviour
                     atTop = false;
                     transform.GetComponent<LineRenderer>().SetPosition(1, otherHits.OrderByDescending(hit => hit.distance).First().point);
                 }
-
             }
 
             if (atTop)
@@ -140,10 +138,10 @@ public class Climber : MonoBehaviour
     }
 
 
-    private void StopClimb()
+    private void FinishedClimbing()
     {
-        const float TOP_CLIMB_FORWARD = 2.0f;
-        const float TOP_CLIMB_UP = 1.0f;
+        const float MOUNT_DISTANCE_FORWARD = 1.5f;
+        const float MOUNT_DISTANCE_UP = 1.0f;
 
         if (_state == ClimbState.None) return;
 
@@ -151,15 +149,14 @@ public class Climber : MonoBehaviour
 
         if (_state == ClimbState.AtTop)
         {
-            BodyOrientation.BodyOrientationInformation bodyFacingInformation = bodyOrientation.GetOrientation();
-
-            climbCompleteDestionation = 
+            // player needs to move forward and up in order to arrive on top of climbable.
+            _mountDestinationPosition = 
                 transform.position + 
-                (bodyFacingInformation.ForwardFacingDirection * TOP_CLIMB_FORWARD) +
-                (bodyFacingInformation.UpDirection * TOP_CLIMB_UP);
+                (bodyOrientation.ForwardFacingDirection * MOUNT_DISTANCE_FORWARD) +
+                (bodyOrientation.UpDirection * MOUNT_DISTANCE_UP);
 
-            climbCompleteTimeElapsed = 0;
-            _state = ClimbState.Completing;
+            _mountTimeElapsed = 0;
+            _state = ClimbState.Mounting;
         }
         else
         {
@@ -169,13 +166,13 @@ public class Climber : MonoBehaviour
     }
 
 
-    private void CompleteClimb()
+    private void ContinueToMount()
     {
-        climbCompleteTimeElapsed += Time.deltaTime;
+        _mountTimeElapsed += Time.fixedDeltaTime;
 
-        transform.position = Vector3.Lerp(transform.position, climbCompleteDestionation, climbCompleteTimeElapsed / CLIMB_COMPLETE_TIME);
+        transform.position = Vector3.Lerp(transform.position, _mountDestinationPosition, _mountTimeElapsed / MOUNT_TIME);
 
-        if (climbCompleteTimeElapsed > CLIMB_COMPLETE_TIME)
+        if (_mountTimeElapsed > MOUNT_TIME)
         {
             _state = ClimbState.None;
             transform.GetComponent<LineRenderer>().enabled = false;
