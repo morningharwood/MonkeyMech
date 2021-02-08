@@ -147,7 +147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12073860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1943335217}
@@ -4094,7 +4094,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: -0.15}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &707251466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4127,7 +4127,7 @@ MonoBehaviour:
   m_MoveSpeed: 2.5
   m_EnableStrafe: 1
   m_UseGravity: 1
-  m_GravityApplicationMode: 0
+  m_GravityApplicationMode: 1
   m_ForwardSource: {fileID: 1943335217}
   m_LeftHandMoveAction:
     m_UseReference: 1
@@ -4165,7 +4165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_System: {fileID: 707251470}
   m_TurnAmount: 1
-  m_DebounceTime: 0.01
+  m_DebounceTime: 0.005
   m_EnableTurnLeftRight: 1
   m_EnableTurnAround: 0
   m_LeftHandSnapTurnAction:
@@ -9502,7 +9502,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh195306
+  m_Name: pb_Mesh21612
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
