@@ -9,7 +9,6 @@ public class KeyframedWhip : MonoBehaviour
 {
     [SerializeField] private InputActionReference inputActionRightTriggerRef = null;
     [SerializeField] private InputActionReference inputActionRightPositionRef = null;
-    [SerializeField] private float inputThreshold = 0.1f;
     [SerializeField] private float newPositionThresholdDistance = 0.05f;
     [SerializeField] private float whipSpeed = 1f;
     [SerializeField] private GameObject whipSegmentPrefab = null;
