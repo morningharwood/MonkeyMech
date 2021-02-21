@@ -734,10 +734,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354100364676e2c49b6795ef964b563b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputActionRightTriggerRef: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  inputActionRightTriggerRef: {fileID: 7277999873730856024, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   inputActionRightPositionRef: {fileID: -3326005586356538449, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   inputThreshold: 0.1
   newPositionThresholdDistance: 0.05
+  whipSpeed: 3
   whipSegmentPrefab: {fileID: 1529954045665571139, guid: 0266a1d699235544989594acb708c0c2, type: 3}
 --- !u!114 &1083835961
 MonoBehaviour:
