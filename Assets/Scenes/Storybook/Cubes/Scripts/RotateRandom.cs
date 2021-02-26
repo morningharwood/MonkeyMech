@@ -5,7 +5,7 @@ using UnityEngine;
 public class RotateRandom : MonoBehaviour
 {
     [SerializeField] private GameObject gameObj;
-    [SerializeField] private float speed = 0.1f;
+    private float speed = 5f;
     void Start()
     {
         
@@ -14,6 +14,6 @@ public class RotateRandom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObj.transform.Rotate(0, speed * Time.deltaTime, 0, Space.Self);
+        transform.Rotate(Vector3.up * (speed * Time.deltaTime));
     }
 }
