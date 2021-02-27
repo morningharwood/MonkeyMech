@@ -16,37 +16,44 @@ public class CoinCollectionAnimation : MonoBehaviour
 
     private bool waitOver;
 
-    [Tooltip( "Minimum amount of time the script waits to play collection animation" )]
+    [Tooltip("Minimum amount of time the script waits to play collection animation")]
     [SerializeField]
     private float minWaitTime = 2.0f;
 
-    [Tooltip( "Maximum amount of time the script waits to play collection animation" )]
+    [Tooltip("Maximum amount of time the script waits to play collection animation")]
     [SerializeField]
     private float maxWaitTime = 4.0f;
 
-    [Tooltip( "How fast the coin moves" )]
+    [Tooltip("How fast the coin moves")]
     [SerializeField]
     private float speed = 3.0f;
+
+    [Tooltip("Rigidbody")]
+    //[SerializeField]
+    private Rigidbody rb;
 
     #endregion
 
     private void Start()
     { // On init
 
-        StartCoroutine( _coinMoveToPlayer( minWaitTime, maxWaitTime ) );
+        rb = gameObject.GetComponent<Rigidbody>();
+
+        StartCoroutine(_coinMoveToPlayer(minWaitTime, maxWaitTime));
+        rb.AddForce(Random.Range(-2.0f, 2.0f), Random.Range(0.0f, 2.0f), Random.Range(-2.0f, 2.0f), ForceMode.Impulse);
 
     }
 
     private void Update()
     { // On every frame
 
-        if ( waitOver )
+        if (waitOver)
         {
 
             this.GetComponent<Rigidbody>().useGravity = false;
 
             #region Move
-            transform.position = Vector3.MoveTowards( transform.position, Camera.main.transform.position, Time.deltaTime * speed );
+            transform.position = Vector3.MoveTowards(transform.position, Camera.main.transform.position, Time.deltaTime * speed);
             #endregion
 
             #region Scale
@@ -60,24 +67,24 @@ public class CoinCollectionAnimation : MonoBehaviour
 
         }
 
-        if ( transform.localScale.x < 0 )
+        if (transform.localScale.x < 0)
         { // Destroys coin once coin has reached scale 0
 
-//          // TEMP \\
-            GameObject emit = GameObject.Find( "AudioSource" );
-            emit.GetComponent<AudioSource>().PlayOneShot( emit.GetComponent<AudioSource>().clip, 0.5f );
-//          \\ TEMP //
+            //          // TEMP \\
+            //GameObject emit = GameObject.Find( "AudioSource" );
+            //emit.GetComponent<AudioSource>().PlayOneShot( emit.GetComponent<AudioSource>().clip, 0.5f );
+            //          \\ TEMP //
 
-            Destroy( this.gameObject ); // Destroys coin
+            Destroy(this.gameObject); // Destroys coin
 
         }
 
     }
 
-    IEnumerator _coinMoveToPlayer( float minWaitTime, float maxWaitTime )
+    IEnumerator _coinMoveToPlayer(float minWaitTime, float maxWaitTime)
     { // Wait
 
-        yield return new WaitForSeconds( Random.Range( minWaitTime, maxWaitTime ) ); // Wait
+        yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime)); // Wait
 
         waitOver = true;
 

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wacker
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -35,9 +36,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Weapon
+  - Hitbox
+  - Coin *TEMP*
   m_SortingLayers:
   - name: Default
     uniqueID: 0
