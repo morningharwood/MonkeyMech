@@ -47,4 +47,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a3be9dfa02575542a48eb5e982797f9, type: 2}
   - {fileID: 11400000, guid: fd39c0b7f72e09749bacbbeb4da0aaec, type: 2}
   - {fileID: 11400000, guid: 6e3485b1b4b08a743afe7c7136960ff9, type: 2}
-  maxGibCount: 12
+  maxGibCount: 7

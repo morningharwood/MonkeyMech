@@ -15,9 +15,6 @@ public class coinsAsset : ScriptableObject
 
     [Space(10)]
 
-    //[ Tooltip( "How commonly the coin spawns." ) ]
-    //public float spawnRate = 100.0f; // How commonly the coin spawns
-
     [Tooltip("How much the coin is worth.")]
     public float worth = 10.0f; // How much the coin is worth
 

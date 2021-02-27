@@ -11,22 +11,29 @@ public class coinSpawn : MonoBehaviour
 
     #region Variables
 
-    public coinsAsset[] coins;
-    public int maxGibCount = 35;
+    [Tooltip( "Coin(s). NOT FINISHED." )]
+    [SerializeField]
+    private coinsAsset[] coins;
+
+    [Tooltip( "Max amount of coins that can spawn" )]
+    [SerializeField]
+    private int maxGibCount = 7;
+
+    private int spawnCurrent; // On current coin spawn...
 
     #endregion
 
-    void Start()
+    private void Start()
     { // On init
        
         if( coins != null )
         { // If coins are in variable "coins"
 
-            StartCoroutine( coinsInstantiate() );
+            StartCoroutine( coinsInstantiate( Random.Range( 3, maxGibCount ) ) );
 
         }
         else
-        { // Destroys object to avoid crashes
+        { // Destroys object to avoid memory leaks
 
             Debug.LogWarning( this.transform.name + " has no coins attached." );
             Destroy( this.gameObject );
@@ -35,44 +42,43 @@ public class coinSpawn : MonoBehaviour
 
     }
 
-    void spawnCoin()
+//  // TEMP \\    
+    private void spawnCoin( float chance )
     { // Creates a coin
-
-        float chance = Random.value;
 
         if ( chance > 0.6f )
         { // 60% chance
 
-            Instantiate( coins[0].coinMesh, new Vector3( this.transform.position.x, this.transform.position.y, this.transform.position.z ), Quaternion.identity );
+            Instantiate( coins[0].coinMesh, this.transform.position, Quaternion.identity );
 
         }
 
         if (chance > 0.3f)
         { // 30% chance
 
-            Instantiate( coins[1].coinMesh, new Vector3( this.transform.position.x, this.transform.position.y, this.transform.position.z ), Quaternion.identity );
+            Instantiate( coins[1].coinMesh, this.transform.position, Quaternion.identity );
 
         }
 
         if (chance > 0.1f)
         { // 10% chance
 
-            Instantiate( coins[2].coinMesh, new Vector3( this.transform.position.x, this.transform.position.y, this.transform.position.z ), Quaternion.identity );
+            Instantiate( coins[2].coinMesh, this.transform.position, Quaternion.identity );
 
         }
 
     }
+//  \\ TEMP //    
 
-    IEnumerator coinsInstantiate()
+    IEnumerator coinsInstantiate( float totalCoins )
     { // Spawn coin(s)
 
-        int spawnCurrent = 0;
-        int coinsSpawnAmount = Random.Range( 3, maxGibCount );
+        spawnCurrent = 0;
 
-        while ( spawnCurrent < coinsSpawnAmount )
+        while ( spawnCurrent < totalCoins )
         {
 
-            spawnCoin();
+            spawnCoin( Random.Range( 0.0f, 1.0f ) );
             spawnCurrent += 1;
 
         }
@@ -82,5 +88,14 @@ public class coinSpawn : MonoBehaviour
         yield return null;
 
     }
+
+    #region Memory Leak Protection
+    private void OnDestroy()
+    {
+
+        StopAllCoroutines();
+
+    }
+    #endregion
 
 }
