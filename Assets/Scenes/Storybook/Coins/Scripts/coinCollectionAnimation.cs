@@ -9,7 +9,7 @@ using UnityEngine;
 // Libraries
 using UnityEngine.Audio;
 
-public class coinCollectionAnimation : MonoBehaviour
+public class CoinCollectionAnimation : MonoBehaviour
 {
 
     #region Variables

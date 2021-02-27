@@ -6,14 +6,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class coinSpawn : MonoBehaviour
+public class CoinSpawn : MonoBehaviour
 {
 
     #region Variables
 
     [Tooltip( "Coin(s). NOT FINISHED." )]
     [SerializeField]
-    private coinsAsset[] coins;
+    private CoinsAsset[] coins;
 
     [Tooltip( "Max amount of coins that can spawn" )]
     [SerializeField]

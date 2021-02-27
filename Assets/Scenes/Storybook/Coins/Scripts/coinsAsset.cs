@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "coin/create/coinAsset")]
-public class coinsAsset : ScriptableObject
+public class CoinsAsset : ScriptableObject
 {
 
     [Tooltip("The coin prefeb OR gameObject.")]
