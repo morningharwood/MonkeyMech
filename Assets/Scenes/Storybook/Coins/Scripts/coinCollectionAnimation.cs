@@ -9,6 +9,9 @@ using UnityEngine;
 // Libraries
 using UnityEngine.Audio;
 
+// Requirements
+// NONE
+
 public class CoinCollectionAnimation : MonoBehaviour
 {
 
@@ -91,12 +94,14 @@ public class CoinCollectionAnimation : MonoBehaviour
     }
 
     #region Memory Leak Protection
+
     private void OnDestroy()
     {
 
         StopAllCoroutines();
 
     }
+
     #endregion
 
 }

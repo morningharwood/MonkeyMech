@@ -6,6 +6,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Libraries
+// NONE
+
+// Requirements
+// NONE
+
+// TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE \\
 public class EnemyAttack : MonoBehaviour
 { // NOT COMPLETED.
 
@@ -53,3 +60,4 @@ public class EnemyAttack : MonoBehaviour
     }
 
 }
+// TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE | TEST CODE \\

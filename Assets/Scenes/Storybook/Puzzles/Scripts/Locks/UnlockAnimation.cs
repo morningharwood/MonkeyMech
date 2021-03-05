@@ -6,6 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Libraries
+// NONE
+
+// Requirements
+// NONE
+
 public class UnlockAnimation : MonoBehaviour
 {
 
@@ -24,6 +30,10 @@ public class UnlockAnimation : MonoBehaviour
     [ Tooltip( "Lock body game object" ) ]
     [ SerializeField ]
     private GameObject lockBody;
+
+    [Tooltip("Particle effect that plays when unlocked")]
+    [SerializeField]
+    private GameObject particles;
 
     private Vector3 lockPartsScale;
     private bool alreadyTriggered;
@@ -100,6 +110,7 @@ public class UnlockAnimation : MonoBehaviour
     { // Animation controller
 
         alreadyTriggered = true;
+        particles.SetActive(true); // Breaking particles
 
         yield return new WaitForSeconds( animationWait );
 
@@ -107,5 +118,16 @@ public class UnlockAnimation : MonoBehaviour
 
     }
 //  \\ TEMP // 
+
+    #region Memory Leak Protection
+
+    private void OnDestroy()
+    {
+
+        StopAllCoroutines();
+
+    }
+
+    #endregion
 
 }

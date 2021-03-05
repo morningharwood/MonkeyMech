@@ -6,6 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Libraries
+// NONE
+
+// Requirements
+// NONE
+
 [CreateAssetMenu(menuName = "coin/create/coinAsset")]
 public class CoinsAsset : ScriptableObject
 {

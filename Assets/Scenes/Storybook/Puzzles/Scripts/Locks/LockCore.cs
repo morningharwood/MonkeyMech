@@ -9,6 +9,9 @@ using UnityEngine;
 // Libraries
 using UnityEngine.Events;
 
+// Requirements
+// NONE
+
 public class LockCore : MonoBehaviour
 {
 

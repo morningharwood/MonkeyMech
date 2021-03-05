@@ -6,6 +6,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Libraries
+// NONE
+
+// Requirements
+// NONE
+
 [CreateAssetMenu(menuName = "Key/create/key")]
 public class KeyCode : ScriptableObject
 {
