@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Storybook/Cubes/Scenes/Alley.unity
     guid: 261dd9a92a797984dbda160a995f100e
   - enabled: 1
-    path: Assets/Scenes/Storybook/Cubes/Scenes/Alley-Perf.unity
+    path: Assets/Scenes/Storybook/Alley/Alley-Perf.unity
     guid: 1c053b8175c03a6449c182eb9cdc90d0
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: e88b19c918ca84b43a996d7eeecb7457, type: 2}
