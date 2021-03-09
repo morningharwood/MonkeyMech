@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4792054862613387369}
   - component: {fileID: 5435155726547532381}
   - component: {fileID: 3928606175455404903}
+  - component: {fileID: 6784210197506087674}
   m_Layer: 7
   m_Name: Cube000
   m_TagString: Untagged
@@ -272,7 +273,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58ca94a3f9108ca418002056c1e8a312, type: 2}
+  - {fileID: 2100000, guid: deadbd40795da8b4c8cf194afa59655b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -394,3 +395,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6784210197506087674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148560309630618295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 0
