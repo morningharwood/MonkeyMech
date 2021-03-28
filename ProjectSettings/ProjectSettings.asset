@@ -137,6 +137,11 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 8150616805459258279, guid: 2f0f1e16820599346815f2b0723e9da1, type: 2}
   - {fileID: 11400000, guid: ef82697ed5c77af4e84217d1574f0fa7, type: 2}
   - {fileID: 4352587342885285732, guid: 7415ac8fa5a977043ac54c21e393a86d, type: 2}
